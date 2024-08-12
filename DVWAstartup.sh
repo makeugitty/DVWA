@@ -31,13 +31,14 @@ sudo cp /var/www/html/DVWA/config config.inc.php.dist config.inc.php
 
 echo "Create mysql user"
 echo "If this doesn't work go to a terminal and dollow the commands in the script for mysql user"
-sudo mysql -u root -p
+sudo mysql -u root -p <<EOF
 password
 CREATE DATABASE dvwa;
 CREATE USER 'dvwauser'@'localhost' IDENTIFIED BY 'password';
 GRANT ALL PRIVILEGES ON dvwa*. TO 'dvwauser'@'localhost';
 FLUSH PRIVILEGES;
 EXIT;
+EOF
 
 echo "Configure PHP"
 PHP_VERSION=$(php -r "echo PHP_MAJOR_VERSION.'.'.PHPMINOR_VERSION;")
