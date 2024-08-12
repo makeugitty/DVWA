@@ -1,6 +1,6 @@
 !#/bin/bash
 
-echo "Updating the System..."
+echo "Updating the System"
 sudo apt update && sudo apt upgrade -y
 
 echo "System updated and upgraded!"
@@ -23,19 +23,21 @@ EOF
 echo "Cloning DVWA repository"
 cd /var/www/html
 sudo git clone https://github.com/digininja/DVWA.git
-sudo chown -R www-data:www-data DVWA
+sudo chown -R www-data:www-data /var/www/htlm/DVWA
+sudo chmod -R 755 /var/www/html/DVWA
 
 echo "Configuring DVWA"
 sudo cp /var/www/html/DVWA/config config.inc.php.dist config.inc.php
 
 echo "Create mysql user"
-#sudo mysql -u root -p
-#password
-#CREATE DATABASE dvwa;
-#CREATE USER 'dvwauser'@'localhost' IDENTIFIED BY 'password';
-#GRANT ALL PRIVILEGES ON dvwa*. TO 'dvwauser'@'localhost';
-#FLUSH PRIVILEGES;
-#EXIT;
+echo "If this doesn't work go to a terminal and dollow the commands in the script for mysql user"
+sudo mysql -u root -p
+password
+CREATE DATABASE dvwa;
+CREATE USER 'dvwauser'@'localhost' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON dvwa*. TO 'dvwauser'@'localhost';
+FLUSH PRIVILEGES;
+EXIT;
 
 echo "Configure PHP"
 PHP_VERSION=$(php -r "echo PHP_MAJOR_VERSION.'.'.PHPMINOR_VERSION;")
